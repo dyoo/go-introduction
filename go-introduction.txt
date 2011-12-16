@@ -95,7 +95,7 @@ end the game, but Black can continue to play.
 Is the right side of the board still White's?  How do we decide?
 
 
-Here's how: if White can "capture" that black stones, then White can
+Here's how: if White can "capture" that black stone, then White can
 defend her claim on the right side.  Let's talk about capture.
 
      
