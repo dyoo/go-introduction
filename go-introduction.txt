@@ -1,0 +1,338 @@
+Go is a game where two players try to control a larger portion of
+the board than the other.
+
+++++++++++
++        +
++        +
++        +
++        +
+++++++++++
+
+Let's use a small board to demonstrate.  Each player takes turns
+placing stones on the board.  We'll call the players "Black" and
+"White".  Traditionally, Black starts the game.
+
+++++++++++
++  B     +
++        +
++        +
++        +
+++++++++++
+
+
+Stones can be placed on any intersection on the board, even the
+corners.  Let's watch a little more.
+
+++++++++++
++  B     +
++        +
++   W    +
++        +
+++++++++++
+
+Black and white take turns playing on the board.
+
+++++++++++
++  B     +
++  B     +
++   W    +
++        +
+++++++++++
+
+Let's say that they continue marching down the board like this,
+creating two walls that face the sides.
+
+++++++++++
++  B     +
++  BW    +
++   W    +
++        +
+++++++++++
+
+...
+
+++++++++++
++  BW    +
++  BW    +
++  BW    +
++  BW    +
+++++++++++
+
+At this point, the board's split in two, the left side being black's,
+and the right side white's.
+
+Who do you think is controlling more of the board here?
+
+
+When the board is broken up into black and white sides, where the
+borders are solid, then both players can agree to end the game here.
+Then we count the size of the respective areas, and whoever got more
+wins.
+
+In this board:
+
+++++++++++
++  BW    +
++  BW    +
++  BW    +
++  BW    +
+++++++++++
+
+White will win the game if black agrees the game is over: her right
+side is larger than black's left side.
+
+
+So let's say that Black doesn't want to be so agreeable.  White might offer to
+end the game, but Black can continue to play.
+
+++++++++++
++  BW    +
++  BW    +
++  BW  B +
++  BW    +
+++++++++++
+
+Is the right side of the board still White's?  How do we decide?
+
+
+Here's how: if White can "capture" that black stones, then White can
+defend her claim on the right side.  Let's talk about capture.
+
+     
+++++++++++
++  BW    +
++  BW    +
++  BW  B +
++  BW    +
+++++++++++
+
+A stone stays on the board as long as it's next to empty space.  So
+let's say that Black falls asleep at the wheel and doesn't make moves,
+just for the sake of showing how capture works.
+
+If white uses her turns to surround the black stone here, and if black
+doesn't respond:
+
+++++++++++
++  BW    +
++  BW    +
++  BW WB +
++  BW    +
+++++++++++
+
+++++++++++
++  BW    +
++  BW  W +
++  BW WB +
++  BW    +
+++++++++++
+
+++++++++++
++  BW    +
++  BW  W +
++  BW WBW+
++  BW    +
+++++++++++
+
+then as soon as White places a stone on the last empty space on the
+bottom, the black stone no longer has access to it, and so it's
+captured.
+
+++++++++++               ++++++++++               
++  BW    +               +  BW    +
++  BW  W +      animate  +  BW  W +
++  BW WBW+        ===>   +  BW W W+
++  BW  W +               +  BW  W +
+++++++++++               ++++++++++
+
+White gets to keep the capture, and when the game's scored, the
+capture counts as an additional point.
+
+           Side path: more simple capturing situations.
+
+
+That's the case when one stone is captured.  When stones of the same
+color connect together, they form groups that are harder to capture.
+The group stays alive so long as the group is next to an empty space.
+So if the black group were more like this:
+
+
+++++++++++
++  BW    +
++  BW  B +
++  BW  B +
++  BW    +
+++++++++++
+
+Then white would need to do more work to capture the black group.
+
+++++++++++
++  BW  W +
++  BW WBW+     (Animate this capture)
++  BW WBW+
++  BW  W +
+++++++++++
+
+White needed more stones to finally capture that right hand side
+group.
+
+
+
+So if black doesn't want to get captured, black can resist by
+stretching out toward open space.  So when White makes the initial
+attempt to surround, black can respond.
+
+++++++++++
++  BW    +
++  BW  B +
++  BW WB +
++  BW    +
+++++++++++
+
+++++++++++
++  BW  B +
++  BW WB +
++  BW WB +
++  BW    +
+++++++++++
+
+...
+
+++++++++++
++  BW WB +
++  BW WB +
++  BW WB +
++  BW WB +
+++++++++++
+
+
+Notice that black then has carved out another section of the board
+out.  Now White is clearly losing: the center is smaller than the two
+sides of black.  Too bad!
+
+
+
+By the way, if you think the situation above was a little unfair, and
+you think White should have been able to hold onto the right side,
+you're right!  Let's go back and see how White should have defended:
+
+++++++++++
++  BW    +
++  BW    +
++  BW  B +
++  BW    +
+++++++++++
+
+Rather than continue to crawl along the left side, white can start
+from the top, confining black to the bottom right corner.
+
+++++++++++
++  BW    +
++  BW W  +
++  BW  B +
++  BW    +
+++++++++++
+
+++++++++++
++  BW    +
++  BW W  +
++  BW BB +
++  BW    +
+++++++++++
+
+++++++++++
++  BW    +
++  BW WW +
++  BW BB +
++  BW    +
+++++++++++
+
+
+++++++++++
++  BW    +
++  BW WW +
++  BWBBB +
++  BW    +
+++++++++++
+
+++++++++++
++  BW    +
++  BWWWW +
++  BWBBB +
++  BW    +
+++++++++++
+
+...
+
+++++++++++
++  BW   W+
++  BWWWWB+
++  BWBBBB+
++  BWWB  +
+++++++++++
+
+White can continue to push forward, jumping into the space that black
+has in the bottom right corner.
+
+++++++++++
++  BW   W+
++  BWWWWB+
++  BWBBBB+
++  BWWB W+
+++++++++++
+
+Black can capture that stone easily... but...
+
+
+++++++++++
++  BW   W+
++  BWWWWB+
++  BWBBBB+
++  BWWBB +
+++++++++++
+
+The black group there only has one empty space next to it.  So white can play there, and
+capture the group!
+
+++++++++++
++  BW   W+
++  BWWWWB+
++  BWBBBB+
++  BWWBBW+
+++++++++++
+
+++++++++++
++  BW   W+
++  BWWWW +
++  BW    +
++  BWW  W+
+++++++++++
+
+So in this case, White has successfuly defended the right side.  Black
+can continue to try invading, but he should find it an uphill climb,
+as long as White responds well.
+
+
+
+    [Clear the board.  Begin to show the moves of a game where the
+    stones aren't forming walls, but are actively cutting things off,
+    and playing all out.]
+
+In most games, players will usually not be content to build placid
+walls.  Black and White will be more ambitious, jump out, try to cut
+each other off, sometimes even ignore the other player for the
+opportunity to plan their "flag" down on virgin soil in an open area
+of the board first.
+
+
+This is where the strategy of Go begins.  You want to take control of
+larger areas of the board than your opponent.  But you also want to be
+able to defend those areas from invasion.  There's a tension, then,
+between greed and safety: if you're greedy and seize too large an
+area, it can be open to invasion.  But if you play too safely, and
+seize small areas of the board, then you might not make enough points
+to win.  It's a balancing act, and it leads to a game that's dynamic
+and surprisingly complex.
+
+
+Have fun!
